@@ -15,10 +15,10 @@ app.post('/payment-process', (req, res) => {
     return res.status(400).json({ error: 'enter the required fields' });
   }
 
-  const idTransaccion = uuidv4();
+  const transactionId = uuidv4();
   
 
-  res.status(200).json({ idTransaccion });
+  res.status(200).json({ transactionId });
 });
 
 app.listen(PORT, () => {
