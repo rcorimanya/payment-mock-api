@@ -21,6 +21,6 @@ app.post('/payment-process', (req, res) => {
   res.status(200).json({ idTransaccion });
 });
 
-app.listen(port, () => {
-  console.log(`server is running in http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`server is running in http://localhost:${PORT}`);
 });
