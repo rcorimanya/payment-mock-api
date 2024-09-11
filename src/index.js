@@ -1,25 +1,26 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const uuid_1 = require("uuid");
-const app = (0, express_1.default)();
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const { v4: uuidv4 } = require('uuid');
+
+const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(express_1.default.json());
-app.post('/process-payment', (req, res) => {
-    const { amount, accountId } = req.body;
-    if (!amount || !accountId) {
-        return res.status(400).json({ error: 'amount and accountId is required.' });
-    }
-    const transactionId = (0, uuid_1.v4)();
-    return res.status(200).json({
-        message: 'payment processed successfully.',
-        transactionId: transactionId
-    });
+
+app.use(bodyParser.json());
+
+app.post('/payment-process', (req, res) => {
+  const { accountId, amount } = req.body;
+
+  if (!accountId || !amount) {
+    return res.status(400).json({ error: 'enter the required fields' });
+  }
+
+  const idTransaccion = uuidv4();
+  
+
+  res.status(200).json({ idTransaccion });
 });
-// Iniciar el servidor
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+
+app.listen(port, () => {
+  console.log(`server is running in http://localhost:${port}`);
 });
